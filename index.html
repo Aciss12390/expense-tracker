@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <script defer src="js/script.js"></script>
+</head>
+<body>
+    <main class="app">
+        <section class="hero">
+            <div>
+                <p class="label">Projekt zaliczeniowy</p>
+                <h1>Expense Tracker</h1>
+                <p class="subtitle">
+                    Prosta aplikacja do zarządzania wydatkami z użyciem HTML, CSS, JavaScript, PHP oraz MySQL.
+                </p>
+            </div>
+
+            <div class="summary-card">
+                <p>Łączna suma wydatków</p>
+                <strong id="totalAmount">0.00 zł</strong>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2>Dodaj wydatek</h2>
+
+            <form id="expenseForm">
+                <input type="hidden" id="expenseId">
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="title">Nazwa wydatku</label>
+                        <input type="text" id="title" placeholder="np. Zakupy spożywcze" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="amount">Kwota</label>
+                        <input type="number" id="amount" step="0.01" min="0.01" placeholder="np. 59.99" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="category">Kategoria</label>
+                        <select id="category" required>
+                            <option value="">Wybierz kategorię</option>
+                            <option value="Jedzenie">Jedzenie</option>
+                            <option value="Transport">Transport</option>
+                            <option value="Rachunki">Rachunki</option>
+                            <option value="Rozrywka">Rozrywka</option>
+                            <option value="Zdrowie">Zdrowie</option>
+                            <option value="Inne">Inne</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="expenseDate">Data</label>
+                        <input type="date" id="expenseDate" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="note">Notatka</label>
+                    <textarea id="note" placeholder="Opcjonalny opis wydatku"></textarea>
+                </div>
+
+                <div class="actions">
+                    <button type="submit" id="submitBtn">Dodaj wydatek</button>
+                    <button type="button" id="cancelEditBtn" class="secondary hidden">Anuluj edycję</button>
+                </div>
+
+                <p id="message" class="message"></p>
+            </form>
+        </section>
+
+        <section class="panel">
+            <div class="section-header">
+                <h2>Lista wydatków</h2>
+                <p>Dane pobierane są z bazy MySQL przez PHP.</p>
+            </div>
+
+            <div id="expensesList" class="expenses-list"></div>
+        </section>
+    </main>
+</body>
+</html>

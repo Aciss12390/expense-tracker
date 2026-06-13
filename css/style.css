@@ -1,0 +1,266 @@
+:root {
+    --bg: #f4f6fb;
+    --panel: #ffffff;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --danger: #dc2626;
+    --danger-dark: #b91c1c;
+    --border: #e5e7eb;
+    --shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+.app {
+    width: min(1100px, 92%);
+    margin: 40px auto;
+}
+
+.hero {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 24px;
+    align-items: stretch;
+    margin-bottom: 24px;
+}
+
+.label {
+    margin: 0 0 8px;
+    color: var(--primary);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 13px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 42px;
+}
+
+.subtitle {
+    max-width: 650px;
+    color: var(--muted);
+    line-height: 1.6;
+}
+
+.summary-card,
+.panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+}
+
+.summary-card {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.summary-card p {
+    margin: 0 0 10px;
+    color: var(--muted);
+}
+
+.summary-card strong {
+    font-size: 32px;
+    color: var(--primary);
+}
+
+.panel {
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+}
+
+label {
+    margin-bottom: 6px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+input,
+select,
+textarea {
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 15px;
+    font-family: inherit;
+}
+
+textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+button {
+    border: none;
+    border-radius: 10px;
+    padding: 12px 18px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 15px;
+    background: var(--primary);
+    color: #ffffff;
+}
+
+button:hover {
+    background: var(--primary-dark);
+}
+
+button.secondary {
+    background: #e5e7eb;
+    color: var(--text);
+}
+
+button.secondary:hover {
+    background: #d1d5db;
+}
+
+button.danger {
+    background: var(--danger);
+}
+
+button.danger:hover {
+    background: var(--danger-dark);
+}
+
+.hidden {
+    display: none;
+}
+
+.message {
+    min-height: 22px;
+    color: var(--muted);
+    font-weight: bold;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.section-header p {
+    margin: 0;
+    color: var(--muted);
+}
+
+.expenses-list {
+    display: grid;
+    gap: 14px;
+}
+
+.expense-card {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 16px;
+    padding: 16px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: #f9fafb;
+}
+
+.expense-card h3 {
+    margin: 0 0 8px;
+}
+
+.expense-meta {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.expense-note {
+    margin: 10px 0 0;
+    color: var(--muted);
+}
+
+.expense-amount {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--primary);
+    text-align: right;
+}
+
+.card-actions {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    margin-top: 12px;
+}
+
+.empty-state {
+    padding: 24px;
+    text-align: center;
+    color: var(--muted);
+    border: 1px dashed var(--border);
+    border-radius: 14px;
+}
+
+@media (max-width: 760px) {
+    .hero,
+    .form-grid,
+    .expense-card {
+        grid-template-columns: 1fr;
+    }
+
+    h1 {
+        font-size: 32px;
+    }
+
+    .section-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .expense-amount {
+        text-align: left;
+    }
+}
