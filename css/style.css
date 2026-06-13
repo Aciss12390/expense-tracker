@@ -1,4 +1,5 @@
 :root {
+    /* Glowne kolory i cienie trzymamy jako zmienne, zeby latwo zmienic wyglad calej strony. */
     --bg: #f4f6fb;
     --panel: #ffffff;
     --text: #1f2937;
@@ -28,6 +29,7 @@ body {
 }
 
 .hero {
+    /* Naglowek laczy opis aplikacji z karta lacznej sumy wydatkow. */
     display: grid;
     grid-template-columns: 1fr 280px;
     gap: 24px;
@@ -90,6 +92,7 @@ h2 {
 }
 
 .form-grid {
+    /* Pola formularza ukladaja sie w dwie kolumny na szerszych ekranach. */
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
@@ -245,6 +248,7 @@ button.danger:hover {
 }
 
 @media (max-width: 760px) {
+    /* Na telefonach przechodzimy na jedna kolumne, aby uniknac sciskania tresci. */
     .hero,
     .form-grid,
     .expense-card {

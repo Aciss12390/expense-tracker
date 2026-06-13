@@ -1,3 +1,5 @@
+// Przechowujemy referencje do elementow DOM w jednym miejscu,
+// aby dalsze funkcje nie musialy za kazdym razem wyszukiwac tych samych pol.
 const form = document.getElementById('expenseForm');
 const expenseId = document.getElementById('expenseId');
 const title = document.getElementById('title');
@@ -12,6 +14,7 @@ const message = document.getElementById('message');
 const submitBtn = document.getElementById('submitBtn');
 const cancelEditBtn = document.getElementById('cancelEditBtn');
 
+// Glowny start aplikacji: ustawiamy date, pobieramy dane i podpinamy zdarzenia.
 document.addEventListener('DOMContentLoaded', () => {
     setTodayDate();
     loadExpenses();
@@ -21,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function setTodayDate() {
+    // Input type="date" oczekuje formatu RRRR-MM-DD.
     const today = new Date().toISOString().split('T')[0];
     expenseDate.value = today;
 }
@@ -28,12 +32,14 @@ function setTodayDate() {
 function showMessage(text) {
     message.textContent = text;
 
+    // Krotkie komunikaty znikaja automatycznie, zeby nie zostawaly po kolejnej akcji.
     setTimeout(() => {
         message.textContent = '';
     }, 3000);
 }
 
 function getFormData() {
+    // URLSearchParams przygotowuje dane w formacie odczytywanym przez PHP z $_POST.
     const data = new URLSearchParams();
 
     data.append('title', title.value.trim());
@@ -50,6 +56,7 @@ function getFormData() {
 }
 
 function clearForm() {
+    // Po zapisie lub anulowaniu wracamy do trybu dodawania nowego wydatku.
     form.reset();
     expenseId.value = '';
     submitBtn.textContent = 'Dodaj wydatek';
@@ -60,6 +67,7 @@ function clearForm() {
 function handleFormSubmit(event) {
     event.preventDefault();
 
+    // Obecnosc ID oznacza edycje istniejacego rekordu; brak ID oznacza tworzenie nowego.
     const url = expenseId.value ? 'php/update.php' : 'php/create.php';
 
     fetch(url, {
@@ -85,6 +93,7 @@ function handleFormSubmit(event) {
 }
 
 function loadExpenses() {
+    // Lista i suma sa odswiezane po kazdej udanej zmianie w bazie.
     fetch('php/read.php')
         .then(response => response.json())
         .then(result => {
@@ -111,6 +120,7 @@ function renderExpenses(expenses) {
         const card = document.createElement('article');
         card.className = 'expense-card';
 
+        // Dane z bazy zabezpieczamy przed wstawieniem ich do HTML.
         const safeTitle = escapeHtml(expense.title);
         const safeCategory = escapeHtml(expense.category);
         const safeDate = escapeHtml(expense.expense_date);
@@ -144,6 +154,7 @@ function renderExpenses(expenses) {
 }
 
 function editExpense(id, currentTitle, currentAmount, currentCategory, currentDate, currentNote) {
+    // Wypelniamy formularz danymi z karty i przelaczamy przycisk na zapis zmian.
     expenseId.value = id;
     title.value = currentTitle;
     amount.value = currentAmount;
@@ -166,6 +177,7 @@ function cancelEdit() {
 }
 
 function deleteExpense(id) {
+    // Potwierdzenie chroni przed przypadkowym usunieciem rekordu.
     const confirmed = confirm('Czy na pewno chcesz usunąć ten wydatek?');
 
     if (!confirmed) {
@@ -197,6 +209,7 @@ function deleteExpense(id) {
 }
 
 function escapeText(text) {
+    // Tekst trafia do atrybutow onclick, wiec trzeba uciec znaki lamiace zapis JavaScript.
     return String(text)
         .replaceAll('\\', '\\\\')
         .replaceAll("'", "\\'")
@@ -205,6 +218,7 @@ function escapeText(text) {
 }
 
 function escapeHtml(text) {
+    // Tekst wyswietlany w HTML escapujemy, aby nie mogl zostac potraktowany jak kod strony.
     return String(text)
         .replaceAll('&', '&amp;')
         .replaceAll('<', '&lt;')
